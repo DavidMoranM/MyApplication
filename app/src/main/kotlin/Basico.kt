@@ -27,7 +27,7 @@ class Basico : AppCompatActivity() {
 
             //1. Constantes
             val ejemplo = 2
-            val X = "Hola"
+            val X = "Holhha"
 
 
             //2. Variables
