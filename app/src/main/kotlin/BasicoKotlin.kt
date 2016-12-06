@@ -2,11 +2,12 @@ package example.health.quo.myapplication
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.Button
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
-class Basico : AppCompatActivity() {
+class BasicoKotlin : AppCompatActivity() {
 
     /*
     1. Constantes
@@ -15,8 +16,10 @@ class Basico : AppCompatActivity() {
     4. Sentencias de control (If y For y recorridos)
     5. Cadena e impresión
     6. Objetos
-    7. Constructores
-    8. Funciones
+    7. Listas
+    8. Constructores
+    9. Funciones
+    10.Asignación de vistas (View Binding)
 
      */
 
@@ -43,8 +46,8 @@ class Basico : AppCompatActivity() {
 
      */
 
-            Toast.makeText(this@Basico, "Hello " + X.substring(2), Toast.LENGTH_SHORT).show()
-            Toast.makeText(this@Basico, "Hello2 ${y}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@BasicoKotlin, "Hello " + X.substring(2), Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@BasicoKotlin, "Hello2 ${y}", Toast.LENGTH_SHORT).show()
 
 
             //3. Comprobación de null
@@ -136,17 +139,47 @@ class Basico : AppCompatActivity() {
             cases(1201200102)
             cases("esa es una cadena de texto")
 
+            //7. Listas (un arrayList dentro de java)
+            val list = listOf<Int>(1,2,3) //Lista de enteros
+            val listDos = listOf(1,2,3)
+            val set = setOf<String>("hola", "adiós")
+            val setDos = setOf("Hola", "Adios")
+            val listString = listOf<String>("Hola", "Muy buenas") //Lista vacía de String
+            val listSort = emptyList<String>()
+
+
+            val mapCompleto = mapOf<Int, String>(
+                    1 to "value",
+                    2 to "value2"
+            )
+
+            val mapSimple = mapOf(
+                    1 to "value",
+                    2 to "value2"
+            )
+
+            for ((key, value) in mapSimple){
+                println("jey $key{} esto es continuación de la key")
+            }
+
+            for (element in list){
+                println("El elemento es: ${element}")
+            }
+
+            for (element in 1..5 step 1){
+                println("holap")
+            }
         }
 
     }
 
-    //7. Constructores en Kotlin
+    //8. Constructores en Kotlin
     class ExampleClass(val name: String, val lastName: String)
 
     //Ejemplo de constructor
     class Person(firstName: String)
 
-    //8. Funciones
+    //9. Funciones
     // Devuelve un return
     fun maxNum(a: Int, b: Int): Int {
         if (a > b) {
@@ -154,6 +187,7 @@ class Basico : AppCompatActivity() {
         } else {
             return b
         }
+        saludarDos()
     }
 
     //Misma función mucho más reducida
@@ -175,6 +209,10 @@ class Basico : AppCompatActivity() {
     //Lo mismo sin Unit
     fun saludarDos() {
         println("hola")
+        var mmmm = myFun()
+        var mmmm2 = myFunDos(param2 = "bla", param = "bla", param3 = 3) //Puede cambiar el orden de los parámetros
+        var mmmm3 = myFunDos("bla","bla",2)
+        println("El valor de la variable es: ${mmmm}")
     }
 
     //Función + concatenación de cadenas
@@ -199,5 +237,53 @@ class Basico : AppCompatActivity() {
             else       -> print("Desconocido")
         }
     }
+
+    //Más funciones!!
+    //Más entendibles y declarativas que en java
+    fun myFun(): String{
+        println("Esta es mi función")
+        return "Esto es lo que devuelve"
+    }
+
+    fun myFunDos(param: String, param2: String, param3: Int): String{
+        println("Esta es mi función")
+        return "Esto es lo que devuelve"
+    }
+
+    //FUNCIÓN QUE NUNCA PUEDA DEVOLVER NULL
+    fun myFunTres(param: String, param2: String, param3: Int): String?{
+        println("Esta es mi función")
+        return null
+    }
+
+    //AMBAS HACEN LO MISMO
+    fun fun2(param1: Int, param2: Int): String{
+        return "MyResult"
+    }
+
+    fun fun2(param1:String, param2: String) = "MyResult"
+
+    //LEER UNA LÍNEA
+    fun myReadLine(): String?{
+        val line= readLine()
+        return if(line.isNullOrEmpty()) null else line
+    }
+
+    //10. Asignación de vistas (View Binding)
+    val recyclerView by lazy {
+        findViewById(R.id.button) as Button
+    }
+    //Esto se podría hacer con Extensions
+    //Mejor usar Extensions
+
+    //Extension functions con Picasso
+    /*
+    fun ImageView.loadUrl(url: String){
+        Picasso.with(context).load(url).into(this)
+    }
+
+
+    */
+
 
 }
